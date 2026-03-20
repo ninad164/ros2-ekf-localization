@@ -32,8 +32,6 @@ Kₜ = Σₜ Hₜᵀ (Hₜ Σₜ Hₜᵀ + Qₜ)⁻¹
 ## 🏗️ System Architecture
 
 ```
-
-```
        +----------------+
        |   /odom        |
        | (wheel data)   |
@@ -148,18 +146,6 @@ ros2 run turtlebot3_teleop teleop_keyboard
 
 ---
 
-## 🎮 Teleoperation Controls
-
-```
-i → forward
-, → backward
-j → rotate left
-l → rotate right
-k → stop
-```
-
----
-
 ## 📊 Monitoring Topics
 
 ### Raw Odometry
@@ -226,9 +212,3 @@ The EKF combines:
 
 * **Odometry** → smooth but drifting
 * **GPS** → noisy but unbiased
-
-Result:
-
-```
-Accurate + Stable Localization
-```
