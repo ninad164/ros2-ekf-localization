@@ -13,16 +13,19 @@ public:
   void initialize(double x, double y, double theta);    // Initialize the starting position.
 
   void predict(double v, double omega, double dt);  // Predict the next state based on control inputs (velocity and angular velocity) and time step.
-  void update_gps(double meas_ys, double meas_y);   // measurement from sensor (GPS)
+  void updatePosition(double meas_x, double meas_y);   // measurement from sensor (GPS)
 
-  Eigen::Vector3d get_state() const;
-  Eigen::Matrix3d get_covariance() const;
+  Eigen::Vector3d getState() const;
+  Eigen::Matrix3d getCovariance() const;
+
+  bool isInitialized() const;
 
 private:
-    Eigen::Vector3d state_; // [x, y, theta]
-    Eigen::Matrix3d P_; // Estimate error covariance
-    Eigen::Matrix3d Q_; // Process noise covariance
-    Eigen::Matrix2d R_gps_; // Measurement noise covariance for GPS
+    Eigen::Vector3d mu_; // [x, y, theta]
+    Eigen::Matrix3d Sigma_; // Estimate error covariance
+    Eigen::Matrix3d R_motion_; // Process noise covariance
+    Eigen::Matrix2d Q_meas_; // Measurement noise covariance for GPS
+    
     bool initialized_;
 };
 

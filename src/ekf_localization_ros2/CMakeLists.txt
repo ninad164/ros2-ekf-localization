@@ -12,8 +12,31 @@ find_package(nav_msgs REQUIRED)
 find_package(sensor_msgs REQUIRED)
 find_package(tf2 REQUIRED)
 find_package(geometry_msgs REQUIRED)
+find_package(gazebo_msgs REQUIRED)
 find_package(Eigen3 REQUIRED)
+
 include_directories(include ${EIGEN3_INCLUDE_DIRS})
+
+add_executable(ekf_node
+  src/ekf.cpp
+  src/ekf_node.cpp
+)
+
+ament_target_dependencies(ekf_node
+  rclcpp
+  nav_msgs
+  sensor_msgs
+  tf2
+  geometry_msgs
+  gazebo_msgs
+)
+
+target_link_libraries(ekf_node Eigen3::Eigen)
+
+install(TARGETS
+  ekf_node
+  DESTINATION lib/${PROJECT_NAME}
+)
 
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)
