@@ -22,6 +22,16 @@ add_executable(ekf_node
   src/ekf_node.cpp
 )
 
+add_executable(fake_gps_node
+  src/fake_gps_node.cpp
+)
+
+ament_target_dependencies(fake_gps_node
+  rclcpp
+  nav_msgs
+  geometry_msgs
+)
+
 ament_target_dependencies(ekf_node
   rclcpp
   nav_msgs
@@ -35,6 +45,7 @@ target_link_libraries(ekf_node Eigen3::Eigen)
 
 install(TARGETS
   ekf_node
+  fake_gps_node
   DESTINATION lib/${PROJECT_NAME}
 )
 

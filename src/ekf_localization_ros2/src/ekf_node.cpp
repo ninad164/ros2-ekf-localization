@@ -3,7 +3,7 @@
 
 #include "rclcpp/rclcpp.hpp"
 #include "nav_msgs/msg/odometry.hpp"
-
+#include "geometry_msgs/msg/point_stamped.hpp"
 #include "ekf_localization_ros2/ekf.hpp"
 
 class EKFNode : public rclcpp::Node
@@ -21,6 +21,11 @@ public:
     ekf_odom_pub_ = this->create_publisher<nav_msgs::msg::Odometry>(
       "/ekf/odom",
       10);
+
+    gps_sub_ = this->create_subscription<geometry_msgs::msg::PointStamped>(
+      "/fake_gps",
+      10,
+      std::bind(&EKFNode::gpsCallback, this, std::placeholders::_1));
 
     RCLCPP_INFO(this->get_logger(), "EKF node started.");
   }
@@ -82,10 +87,23 @@ private:
     ekf_odom_pub_->publish(odom_msg);
   }
 
+  void gpsCallback(const geometry_msgs::msg::PointStamped::SharedPtr msg)
+  {
+    if (!ekf_.isInitialized()) {
+      return;
+    }
+
+    const double meas_x = msg->point.x;
+    const double meas_y = msg->point.y;
+
+    ekf_.updatePosition(meas_x, meas_y);
+  }
+  
   EKF ekf_;
 
   rclcpp::Subscription<nav_msgs::msg::Odometry>::SharedPtr odom_sub_;
   rclcpp::Publisher<nav_msgs::msg::Odometry>::SharedPtr ekf_odom_pub_;
+  rclcpp::Subscription<geometry_msgs::msg::PointStamped>::SharedPtr gps_sub_;
 
   rclcpp::Time last_odom_time_;
 };
