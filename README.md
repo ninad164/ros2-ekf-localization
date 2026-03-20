@@ -57,9 +57,6 @@ Kₜ = Σₜ Hₜᵀ (Hₜ Σₜ Hₜᵀ + Qₜ)⁻¹
                 v
          /ekf/odom (output)
 ```
-
-```
-
 ---
 
 ## 📂 Package Structure
@@ -78,8 +75,6 @@ ekf_localization_ros2/
 └── package.xml
 
 ````
-
----
 
 ## ⚙️ Installation
 
