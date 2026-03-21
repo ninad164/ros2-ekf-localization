@@ -4,6 +4,35 @@ A ROS2-based implementation of **Extended Kalman Filter (EKF) localization** bui
 The system performs real-time sensor fusion between odometry and simulated noisy GPS measurements in Gazebo.
 
 ---
+## 📊 Results
+
+### 🎥 Demo Video
+
+A demonstration of the robot moving in a straight line while EKF localization runs in real-time.
+
+<video src="results/line.mp4" width="600" controls></video>
+
+---
+
+### 📈 Trajectory Comparison
+
+![Trajectory Comparison](results/trajectory_comparison.png)
+
+**Legend:**
+- 🔵 Odometry: Smooth but prone to drift
+- 🔴 Fake GPS: Noisy measurements
+- 🟢 EKF: Fused estimate combining prediction and correction
+
+---
+
+### 🧠 Interpretation
+
+- The fake GPS shows high variance due to simulated noise.
+- Odometry provides smooth motion estimates but can accumulate error.
+- The EKF combines both sources to produce a filtered trajectory.
+
+In this straight-line experiment, the EKF tracks the motion while mitigating measurement noise, demonstrating effective sensor fusion.
+---
 
 ## 📌 Overview
 
