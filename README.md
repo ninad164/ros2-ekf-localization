@@ -10,7 +10,7 @@ The system performs real-time sensor fusion between odometry and simulated noisy
 
 A demonstration of the robot moving in a straight line while EKF localization runs in real-time.
 
-<video src="results/line.mp4" width="600" controls></video>
+[▶️ Watch Demo]https://github.com/ninad164/ros2-ekf-localization/blob/main/line.mp4
 
 ---
 
